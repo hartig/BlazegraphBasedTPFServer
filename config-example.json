@@ -1,0 +1,48 @@
+{
+  "title": "My Linked Data Fragments server",
+
+  "datasourcetypes": {
+    "HdtDatasource"         : "org.linkeddatafragments.datasource.hdt.HdtDataSourceType",
+    "JenaTDBDatasource"     : "org.linkeddatafragments.datasource.tdb.JenaTDBDataSourceType",
+    "BlazegraphDataSource"  : "org.linkeddatafragments.datasource.blazegraph.BlazegraphDataSourceType"
+  },
+
+  "datasources": {
+    "watdiv": {
+      "title": "WatDiv",
+      "type": "BlazegraphDataSource",
+      "description": "WatDiv benchmark dataset with a Blazegraph back-end",
+      "settings": {
+           "com.bigdata.rdf.sail.truthMaintenance": "false",
+           "com.bigdata.rdf.store.AbstractTripleStore.triplesMode": "true",
+           "com.bigdata.rdf.store.AbstractTripleStore.axiomsClass": "com.bigdata.rdf.axioms.NoAxioms",
+           "com.bigdata.rdf.store.AbstractTripleStore.justify": "false",
+           "com.bigdata.rdf.store.AbstractTripleStore.statementIdentifiers": "false",
+           "com.bigdata.rdf.store.AbstractTripleStore.textIndex": "false",
+           "com.bigdata.journal.AbstractJournal.create": "false",
+
+           // used for DiskRW mode
+           "com.bigdata.journal.AbstractJournal.file": "data/watdiv.10M.jnl",
+           // used for MemStore mode
+           "file": "data/watdiv.10M.nt",
+
+// chose between any of the following two modes
+           "com.bigdata.journal.AbstractJournal.bufferMode":
+                 "DiskRW"
+                 //"MemStore"
+      }
+  },
+
+  "prefixes": {
+    "rdf":         "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs":        "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd":         "http://www.w3.org/2001/XMLSchema#",
+    "dc":          "http://purl.org/dc/terms/",
+    "foaf":        "http://xmlns.com/foaf/0.1/",
+    "dbpedia":     "http://dbpedia.org/resource/",
+    "dbpedia-owl": "http://dbpedia.org/ontology/",
+    "dbpprop":     "http://dbpedia.org/property/",
+    "hydra":       "http://www.w3.org/ns/hydra/core#",
+    "void":        "http://rdfs.org/ns/void#"
+  }
+}

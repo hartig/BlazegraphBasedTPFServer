@@ -1,0 +1,159 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>BlazegraphBasedTPFServer</groupId>
+    <artifactId>BlazegraphBasedTPFServer</artifactId>
+    <version>0.1</version>
+    <packaging>war</packaging>
+
+<repositories>
+<repository>
+   <id>bigdata.releases</id>
+   <url>http://www.systap.com/maven/releases</url>
+</repository>
+</repositories>
+
+    <properties>
+        <jettyVersion>9.2.5.v20141112</jettyVersion>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>LDF-Server</groupId>
+            <artifactId>LDF-Server</artifactId>
+            <version>0.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.rdfhdt</groupId>
+            <artifactId>hdt-jena</artifactId>
+            <version>1.1</version>
+        </dependency>
+ <dependency>
+	<groupId>org.openrdf.sesame</groupId>
+	<artifactId>sesame-rio-api</artifactId>
+	<version>2.7.13</version>
+</dependency>
+<dependency>
+	<groupId>org.openrdf.sesame</groupId>
+	<artifactId>sesame-rio-turtle</artifactId>
+	<version>2.7.13</version>
+</dependency>
+ <dependency>
+	<groupId>org.openrdf.sesame</groupId>
+	<artifactId>sesame-rio-ntriples</artifactId>
+	<version>2.7.13</version>
+</dependency>
+<dependency>
+	<groupId>org.openrdf.sesame</groupId>
+	<artifactId>sesame-rio-rdfxml</artifactId>
+	<version>2.7.13</version>
+</dependency>
+<dependency>
+	<groupId>org.openrdf.sesame</groupId>
+	<artifactId>sesame-rio-binary</artifactId>
+	<version>2.7.13</version>
+</dependency>
+<dependency>
+	<groupId>org.openrdf.sesame</groupId>
+	<artifactId>sesame-rio-rdfjson</artifactId>
+	<version>2.7.13</version>
+</dependency>
+ <dependency>
+   <groupId>com.bigdata</groupId>
+   <artifactId>bigdata</artifactId>
+   <version>1.5.3</version>
+ </dependency>
+        <dependency>
+            <groupId>org.apache.jena</groupId>
+            <artifactId>jena-core</artifactId>
+            <version>2.11.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.jena</groupId>
+            <artifactId>jena-arq</artifactId>
+            <version>2.11.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.3.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+            <version>4.3.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.3</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-server</artifactId>
+            <version>${jettyVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-servlet</artifactId>
+            <version>${jettyVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-cli</groupId>
+            <artifactId>commons-cli</artifactId>
+            <version>1.2</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <sourceDirectory>src</sourceDirectory>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <warSourceDirectory>WebContent</warSourceDirectory>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <finalName>
+                        BlazegraphBasedTPFServer
+                    </finalName>
+                    <appendAssemblyId>false</appendAssemblyId>
+                    <archive>
+                        <manifest>
+                            <mainClass>org.linkeddatafragments.standalone.JettyServer</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
