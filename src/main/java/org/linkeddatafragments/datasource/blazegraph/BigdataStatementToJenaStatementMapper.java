@@ -25,6 +25,16 @@ import com.bigdata.rdf.model.BigdataValue;
 public class BigdataStatementToJenaStatementMapper
     implements Map1<BigdataStatement,Statement>
 {
+    private static BigdataStatementToJenaStatementMapper instance = null;
+
+    public static BigdataStatementToJenaStatementMapper getInstance()
+    {
+        if ( instance == null ) {
+            instance = new BigdataStatementToJenaStatementMapper();
+        }
+        return instance;
+    }
+
     public static final TypeMapper JENA_TYPE_MAPPER = TypeMapper.getInstance();
 
     @Override
