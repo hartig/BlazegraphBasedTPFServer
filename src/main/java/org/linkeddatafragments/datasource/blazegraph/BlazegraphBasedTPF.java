@@ -7,6 +7,8 @@ import com.hp.hpl.jena.util.iterator.Map1Iterator;
 import com.bigdata.rdf.model.BigdataStatement;
 import com.bigdata.rdf.store.BigdataStatementIterator;
 
+import java.io.Closeable;
+
 import org.linkeddatafragments.fragments.tpf.TriplePatternFragmentBase;
 
 /**
@@ -73,15 +75,54 @@ public class BlazegraphBasedTPF extends TriplePatternFragmentBase
 
     static public class MyStmtIterator
         extends Map1Iterator<BigdataStatement,Statement>
-        implements StmtIterator
+        implements StmtIterator, Closeable
     {
-        public MyStmtIterator( final BigdataStatementIterator blzgStmtIt ) {
-            super( new BigdataStatementToJenaStatementMapper(), blzgStmtIt );
+        protected final BigdataStatementIterator blzgStmtIt;
+        private boolean closed = false;
+
+        public MyStmtIterator( final BigdataStatementIterator blzgStmtIt )
+        {
+            super( BigdataStatementToJenaStatementMapper.getInstance(),
+                   blzgStmtIt );
+
+            this.blzgStmtIt = blzgStmtIt;
         }
 
         @Override
-        public Statement nextStatement() {
+        public Statement nextStatement()
+        {
             return next();
+        }
+
+        @Override
+        public boolean hasNext()
+        {
+            if ( closed )
+                return false;
+
+            if ( ! blzgStmtIt.hasNext() ) {
+                close();
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+        
+        @Override
+        public void close()
+        {
+            if ( closed )
+                return;
+
+            blzgStmtIt.close();
+            super.close();
+            closed = true;
+        }
+
+        public boolean isClosed()
+        {
+            return closed;
         }
 
     } // end of MyStmtIterator
