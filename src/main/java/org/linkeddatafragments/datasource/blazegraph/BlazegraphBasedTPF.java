@@ -5,7 +5,10 @@ import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.util.iterator.Map1Iterator;
 
 import com.bigdata.rdf.model.BigdataStatement;
+import com.bigdata.rdf.spo.ISPO;
+import com.bigdata.rdf.store.AbstractTripleStore;
 import com.bigdata.rdf.store.BigdataStatementIterator;
+import com.bigdata.relation.accesspath.IAccessPath;
 
 import java.io.Closeable;
 
@@ -20,37 +23,31 @@ public class BlazegraphBasedTPF extends TriplePatternFragmentBase
 {
     protected final MyStmtIterator myStmtIt;
 
-    /**
-     * Creates an empty Triple Pattern Fragment.
-     */
-    public BlazegraphBasedTPF( final String fragmentURL,
-                               final String datasetURL )
-    {
-        this( null, 0L, fragmentURL, datasetURL, 1, true );
-    }
-
-    /**
-     * Creates an empty Triple Pattern Fragment page.
-     */
-    public BlazegraphBasedTPF( final String fragmentURL,
-                               final String datasetURL,
-                               final long pageNumber,
-                               final boolean isLastPage )
-    {
-        this( null, 0L, fragmentURL, datasetURL, pageNumber, isLastPage );
-    }
-
-    /**
-     * Creates a new Triple Pattern Fragment.
-     * @param triples the triples (possibly partial)
-     * @param totalSize the total size
-     */
-    public BlazegraphBasedTPF( final BigdataStatementIterator blzgStmtIt,
-                               long totalSize,
+    public BlazegraphBasedTPF( final IAccessPath<ISPO> ap,
+                               final AbstractTripleStore store,
+                               final long count,
+                               final long offset,
+                               final long limit,
                                final String fragmentURL,
                                final String datasetURL,
-                               final long pageNumber,
-                               final boolean isLastPage )
+                               final long pageNumber )
+    {
+        this( (ap==null)    // blzgStmtIt
+                    ? null
+                    : store.asStatementIterator( ap.iterator(offset,limit,0) ), // capacity=0, i.e., default capacity will be used
+              count,        // totalSize
+              fragmentURL,
+              datasetURL,
+              pageNumber,
+              (count < offset+limit) ); // isLastPage
+    }
+
+    protected BlazegraphBasedTPF( final BigdataStatementIterator blzgStmtIt,
+                                  long totalSize,
+                                  final String fragmentURL,
+                                  final String datasetURL,
+                                  final long pageNumber,
+                                  final boolean isLastPage )
     {
         super( totalSize, fragmentURL, datasetURL, pageNumber, isLastPage );
 

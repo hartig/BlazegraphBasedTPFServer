@@ -11,7 +11,6 @@ import com.bigdata.rdf.model.BigdataValue;
 import com.bigdata.rdf.spo.ISPO;
 import com.bigdata.rdf.spo.SPOFilter;
 import com.bigdata.rdf.store.AbstractTripleStore;
-import com.bigdata.rdf.store.BigdataStatementIterator;
 import com.bigdata.relation.accesspath.IAccessPath;
 
 import org.linkeddatafragments.datasource.AbstractRequestProcessorForTriplePatterns;
@@ -106,17 +105,8 @@ public class BlazegraphBasedTPFRequestProcessor
                                                               asIVorNull(o),
                                                               null, // c=null
                                                               filter );
-            final long count = ap.rangeCount( false ); // exact=false, i.e., fast range count
 
-            if ( count == 0L ) {
-                return createEmptyTriplePatternFragment();
-            }
-
-            final boolean isLastPage = ( count < offset + limit );
-            final BigdataStatementIterator it =
-                      store.asStatementIterator( ap.iterator(offset,limit,0) ); // capacity=0, i.e., default capacity will be used
-
-            return createTriplePatternFragment( it, count, isLastPage );
+            return createTriplePatternFragment( ap, offset, limit );
         }
 
         public VariablesBasedFilter createFilterIfNeeded(
@@ -169,16 +159,25 @@ public class BlazegraphBasedTPFRequestProcessor
         }
 
         protected ITriplePatternFragment createTriplePatternFragment(
-                                             final BigdataStatementIterator it,
-                                             final long totalSize,
-                                             final boolean isLastPage )
+                                                    final IAccessPath<ISPO> ap,
+                                                    final long offset,
+                                                    final long limit )
         {
-            return new BlazegraphBasedTPF( it,
-                                           totalSize,
-                                           request.getFragmentURL(),
-                                           request.getDatasetURL(),
-                                           request.getPageNumber(),
-                                           isLastPage );
+            final long count = ap.rangeCount( false ); // exact=false, i.e., fast range count
+
+            if ( count == 0L ) {
+                return createEmptyTriplePatternFragment();
+            }
+            else {
+                return new BlazegraphBasedTPF( ap,
+                                               store,
+                                               count,
+                                               offset,
+                                               limit,
+                                               request.getFragmentURL(),
+                                               request.getDatasetURL(),
+                                               request.getPageNumber() );
+            }
         }
 
     } // end of class Worker
