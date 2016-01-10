@@ -68,6 +68,12 @@ public class BlazegraphBasedTPF extends TriplePatternFragmentBase
 
         return myStmtIt;
     }
+    
+    @Override
+    public void close()
+    {
+        myStmtIt.close();
+    }
 
 
     static public class MyStmtIterator
