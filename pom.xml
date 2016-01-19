@@ -68,7 +68,14 @@
         <dependency>
             <groupId>org.linkeddatafragments</groupId>
             <artifactId>ldfserver</artifactId>
-            <version>0.1.0</version>
+            <version>0.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.linkeddatafragments</groupId>
+            <artifactId>ldfserver</artifactId>
+            <type>test-jar</type>
+            <version>0.1.1</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -237,7 +244,6 @@
   </profiles>
 
     <build>
-        <sourceDirectory>src</sourceDirectory>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>

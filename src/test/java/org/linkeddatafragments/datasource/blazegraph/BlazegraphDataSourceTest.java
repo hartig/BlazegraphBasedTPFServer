@@ -23,7 +23,7 @@ import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.rio.RDFFormat;
 
-import test.java.org.linkeddatafragments.datasource.DataSourceTest;
+import org.linkeddatafragments.test.datasource.DataSourceTest;
 
 /**
  * @author <a href="http://olafhartig.de">Olaf Hartig</a>
