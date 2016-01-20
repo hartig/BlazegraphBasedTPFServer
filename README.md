@@ -1,25 +1,22 @@
 # Blazegraph-Based TPF Server
 The Blazegraph-Based TPF Server is a [Linked Data Fragment (LDF)](http://linkeddatafragments.org/) server that provides a [Triple Pattern Fragment (TPF)](http://linkeddatafragments.org/in-depth/#tpf) interface using the [Blazegraph](https://www.blazegraph.com/) graph database as backend.
 
-## Compiling
-The Blazegraph-Based TPF Server is an extension of the generic, Java-based LDF server framework [Server.Java](https://github.com/LinkedDataFragments/Server.Java). Since this framework is not yet available as an online Maven artifact, it has to be compiled and deployed locally before the Blazegraph-Based TPF Server can be compiled. To this end, obtain the latest source code of [Server.Java](https://github.com/LinkedDataFragments/Server.Java) by cloning its github repository as follows:
+
+##Maven Dependency
+The Blazegraph-based TPF Server is available on Maven Central.
 
 ```
-git clone https://github.com/LinkedDataFragments/Server.Java.git
+   <dependency>
+     <groupId>com.blazegraph</groupId>
+     <artifactId>BlazegraphBasedTPFServer</artifactId>
+     <version>0.1.0-SNAPSHOT</version>
+   </dependency>
 ```
 
-Next, compile [Server.Java](https://github.com/LinkedDataFragments/Server.Java) and deploy it locally:
+##Extending the TPF Server
 
 ```
-cd Server.Java
-mvn install
-cd ..
-```
-
-Now you are ready to obtain the source code of the Blazegraph-Based TPF Server and compile it:
-
-```
-git clone https://github.com/hartig/BlazegraphBasedTPFServer.git
+git clone https://github.com/blazegraph/BlazegraphBasedTPFServer.git
 cd BlazegraphBasedTPFServer
 mvn package
 ```
