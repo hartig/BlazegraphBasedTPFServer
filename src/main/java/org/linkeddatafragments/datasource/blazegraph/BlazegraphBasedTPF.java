@@ -1,21 +1,20 @@
 package org.linkeddatafragments.datasource.blazegraph;
 
-import com.hp.hpl.jena.rdf.model.Statement;
-import com.hp.hpl.jena.rdf.model.StmtIterator;
-import com.hp.hpl.jena.util.iterator.Map1Iterator;
+import java.io.Closeable;
+
+import org.linkeddatafragments.fragments.tpf.TriplePatternFragmentBase;
 
 import com.bigdata.rdf.model.BigdataStatement;
 import com.bigdata.rdf.spo.ISPO;
 import com.bigdata.rdf.store.AbstractTripleStore;
 import com.bigdata.rdf.store.BigdataStatementIterator;
 import com.bigdata.relation.accesspath.IAccessPath;
-
-import java.io.Closeable;
-
-import org.linkeddatafragments.fragments.tpf.TriplePatternFragmentBase;
+import com.hp.hpl.jena.rdf.model.Statement;
+import com.hp.hpl.jena.rdf.model.StmtIterator;
+import com.hp.hpl.jena.util.iterator.Map1Iterator;
 
 /**
- * Implementation of {@link TriplePatternFragment}.
+ * Implementation of {@link org.linkeddatafragments.fragments.tpf.TriplePatternFragmentBase}.
  * 
  * @author <a href="http://olafhartig.de">Olaf Hartig</a>
  */
