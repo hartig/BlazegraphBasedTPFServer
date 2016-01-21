@@ -13,6 +13,9 @@ The Blazegraph-based TPF Server is available on Maven Central.
    </dependency>
 ```
 
+##Javadocs
+[Javadocs](https://blazegraph.github.io/BlazegraphBasedTPFServer/apidocs/)
+
 ##Extending the TPF Server
 
 ```
