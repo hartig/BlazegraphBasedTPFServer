@@ -22,7 +22,7 @@ The Blazegraph-based TPF Server is available on Maven Central.
  * Setup your environment for Sonatype [See](http://central.sonatype.org/pages/apache-maven.html#other-prerequisites)
  * Make sure to set the blazegraph version to the latest release in Maven Central.
  * Add and commit all changes.   
- * `mvn -Pmaven-central release:clean release:prepare` [See](http://central.sonatype.org/pages/apache-maven.html#performing-a-release-deployment-with-the-maven-release-plugin).  You will be prompted to enter the next version number, which should be in the form X.Y.X, i.e. 0.2.0.
+ * `mvn -Pmaven-central release:clean release:prepare` [See](http://central.sonatype.org/pages/apache-maven.html#performing-a-release-deployment-with-the-maven-release-plugin).  You will be prompted to enter the next version number, which should be in the form X.Y.X, i.e. 0.1.1.  It's OK to accept the defaults.
  * `mvn -Pmaven-central release:perform` [See](http://central.sonatype.org/pages/apache-maven.html#performing-a-release-deployment-with-the-maven-release-plugin)
  * Checkout the release tag, `git checkout 0.1.0`, and publish the javadocs:  `./publishDocs.sh`.
 
