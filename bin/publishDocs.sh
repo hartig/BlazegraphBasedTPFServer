@@ -1,5 +1,5 @@
 #!/bin/bash
-#Script to publish javadoc to https://blazegraph.github.com/database/apidocs/
+#Script to publish javadoc to https://blazegraph.github.com/
 BASE_DIR=`dirname $0`
 PARENT_POM="${BASE_DIR}/../pom.xml"
 DEST_DIR=BlazegraphBasedTPFServer/apidocs/
@@ -16,15 +16,16 @@ fi
 
 mvn -f "${PARENT_POM}" javadoc:javadoc
 
-echo "Javadoc is located in ${BASE_DIR}/../target/site/apidocs/"
+echo "Javadoc is located in ${BASE_DIR}/../target/apidocs/"
 
 pushd `pwd`
 mkdir -p "${GITHUB_PAGES}/${DEST_DIR}"
-echo cp -rf "${BASE_DIR}"/../target/site/apidocs/* "${GITHUB_PAGES}/${DEST_DIR}"
-cp -rf "${BASE_DIR}"/../target/site/apidocs/* "${GITHUB_PAGES}/${DEST_DIR}"
+echo cp -rf "${BASE_DIR}"/../target/apidocs/* "${GITHUB_PAGES}/${DEST_DIR}"
+cp -rf "${BASE_DIR}"/../target/apidocs/* "${GITHUB_PAGES}/${DEST_DIR}"
 cd $"${GITHUB_PAGES}"
+git pull
 git add --all
-git commit -m "Update for Blazegraph Database Javadocs"
+git commit -m "Update for $DEST_DIR javadocs"
 git push origin master
 
 popd 
