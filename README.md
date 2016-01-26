@@ -9,7 +9,7 @@ The Blazegraph-based TPF Server is available on Maven Central.
    <dependency>
      <groupId>com.blazegraph</groupId>
      <artifactId>BlazegraphBasedTPFServer</artifactId>
-     <version>0.1.0-SNAPSHOT</version>
+     <version>0.1.0</version>
    </dependency>
 ```
 
