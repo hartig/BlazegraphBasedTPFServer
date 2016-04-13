@@ -11,6 +11,8 @@ import java.util.Properties;
 import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.rio.RDFFormat;
+import org.openrdf.rio.RDFParser;
+import org.openrdf.rio.helpers.BasicParserSettings;
 
 import com.bigdata.journal.Options;
 import com.bigdata.rdf.sail.BigdataSail;
@@ -162,6 +164,8 @@ System.out.println( "SHUTTING DOWN THE REPO" );
         catch ( RepositoryException e ) {
             throw new DataSourceCreationException( e );
         }
+
+        cxn.getParserConfig().addNonFatalError(BasicParserSettings.VERIFY_DATATYPE_VALUES);
 
         try {
             final String baseURL = "http://db.uwaterloo.ca/~galuc/wsdbm/";
