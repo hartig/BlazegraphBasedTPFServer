@@ -4,7 +4,7 @@
     <groupId>com.blazegraph</groupId>
     <artifactId>BlazegraphBasedTPFServer</artifactId>
     <version>0.1.0</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>Blazegraph-Based TPF Server</name>
     <description>This is a Linked Data Fragment (LDF) server that provides a Triple Pattern Fragment (TPF) interface using the Blazegraph graph database as backend.</description>
     <url>http://www.blazegraph.com/</url>
@@ -29,7 +29,7 @@
     <developers>
         <developer>
             <name>Olaf Hartig</name>
-            <email>ohartig@uwaterloo.ca</email>
+            <email>olaf.hartig@liu.se</email>
             <url>http://olafhartig.de</url>
         </developer>
     </developers>
@@ -78,6 +78,7 @@
             <scope>test</scope>
         </dependency>
 
+<!--
         <dependency>
             <groupId>org.openrdf.sesame</groupId>
             <artifactId>sesame-rio-api</artifactId>
@@ -108,13 +109,15 @@
             <artifactId>sesame-rio-rdfjson</artifactId>
             <version>2.7.12</version>
         </dependency>
+-->
 
          <dependency>
             <groupId>com.blazegraph</groupId>
             <artifactId>bigdata-core</artifactId>
-            <version>2.0.0-RC2-SNAPSHOT</version>
+            <version>2.0.0</version>
          </dependency>
 
+<!--
         <dependency>
             <groupId>org.rdfhdt</groupId>
             <artifactId>hdt-jena</artifactId>
@@ -166,6 +169,7 @@
             <artifactId>commons-cli</artifactId>
             <version>1.2</version>
         </dependency>
+-->
     </dependencies>
 
   <profiles>
@@ -261,6 +265,7 @@
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
+<!--
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <executions>
@@ -284,6 +289,40 @@
                     </descriptorRefs>
                 </configuration>
             </plugin>
+-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>2.3</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <finalName>${project.artifactId}-${project.version}-SHADED</finalName>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>org.linkeddatafragments.standalone.JettyServer</mainClass>
+                                </transformer>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                            </transformers>
+                            <filters>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/*.SF</exclude>
+                                        <exclude>META-INF/*.DSA</exclude>
+                                        <exclude>META-INF/*.RSA</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
+                        </configuration>
+                    </execution>
+                </executions>
+              </plugin>
+
         </plugins>
     </build>
 

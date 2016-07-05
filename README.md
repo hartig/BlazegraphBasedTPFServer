@@ -2,21 +2,7 @@
 The Blazegraph-Based TPF Server is a [Linked Data Fragment (LDF)](http://linkeddatafragments.org/) server that provides a [Triple Pattern Fragment (TPF)](http://linkeddatafragments.org/in-depth/#tpf) interface using the [Blazegraph](https://www.blazegraph.com/) graph database as backend.
 
 ## Compiling
-The Blazegraph-Based TPF Server is an extension of the generic, Java-based LDF server framework [Server.Java](https://github.com/LinkedDataFragments/Server.Java). Since this framework is not yet available as an online Maven artifact, it has to be compiled and deployed locally before the Blazegraph-Based TPF Server can be compiled. To this end, obtain the latest source code of [Server.Java](https://github.com/LinkedDataFragments/Server.Java) by cloning its github repository as follows:
-
-```
-git clone https://github.com/LinkedDataFragments/Server.Java.git
-```
-
-Next, compile [Server.Java](https://github.com/LinkedDataFragments/Server.Java) and deploy it locally:
-
-```
-cd Server.Java
-mvn install
-cd ..
-```
-
-Now you are ready to obtain the source code of the Blazegraph-Based TPF Server and compile it:
+Before you can use the Blazegraph-Based TPF Server, you have to obtain the source code and compile it:
 
 ```
 git clone https://github.com/hartig/BlazegraphBasedTPFServer.git
@@ -33,7 +19,7 @@ The configuration file contains a section for _"datasources"_ to which you add e
 The server can be started as follows:
 
 ```
-java -server -Xmx4g -jar target/BlazegraphBasedTPFServer.jar config.json
+java -server -Xmx4g -jar target/BlazegraphBasedTPFServer-0.1.0-SHADED.jar config.json
 ```
 
 You may have to increase the `-Xmx` parameter if you use an in-memory dataset.
