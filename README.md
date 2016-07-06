@@ -19,7 +19,7 @@ The configuration file contains a section for _"datasources"_ to which you add e
 The server can be started as follows:
 
 ```
-java -server -Xmx4g -jar target/BlazegraphBasedTPFServer-0.1.0-SHADED.jar config.json
+java -server -Xmx4g -jar target/BlazegraphBasedTPFServer-0.1.0.jar config.json
 ```
 
 You may have to increase the `-Xmx` parameter if you use an in-memory dataset.
